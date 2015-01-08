@@ -1,0 +1,31 @@
+library ieee;
+use ieee.std_logic_1164.all;                             
+use ieee.std_logic_unsigned.all;
+use ieee.std_logic_arith.all;
+
+entity sawtooth is
+      port(clk3:in std_logic;
+           dd3:out integer range 255 downto 0);
+end sawtooth;
+
+architecture dacc of sawtooth is
+
+begin
+   process(clk3)
+   variable b:std_logic;
+   variable  c:integer range 255 downto 0;
+   begin
+     if(clk3'event and clk3='1')then
+       if(b='0')then
+          c:=c+5;
+           if(c>=200)then
+               b:='1';
+              end if;
+         else 
+           c:='0';
+           b:='0';
+           end if;
+        end if;
+      dd3<=c;
+end process;
+end dacc;
